@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Login SYSACAD</title>
+  <style>
+    body {
+      background-image: url('https://www.transparenttextures.com/patterns/white-wall-3.png');
+      font-family: 'Times New Roman', serif;
+      text-align: center;
+      padding-top: 40px;
+    }
+
+    h1 {
+      color: blue;
+      margin: 2px 0 0;
+    }
+
+    h2 {
+      color: blue;
+      margin: 2px 0 20px;
+    }
+
+    h3 {
+      color: #4444cc;
+      margin: 2px 0 5px;
+      font-weight: normal;
+    }
+
+
+    .login-box {
+      background-color: white;
+      border: 2px solid blue;
+      display: inline-block;
+      padding: 20px 40px;
+      margin-top: 20px;
+    }
+
+    .login-box h3 {
+      background-color: blue;
+      color: white;
+      padding: 10px;
+      margin: -20px -40px 20px;
+    }
+
+    label {
+      display: inline-block;
+      width: 80px;
+      text-align: right;
+      margin-right: 10px;
+      font-size: 17px;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+      width: 150px;
+      padding: 5px;
+      margin-bottom: 10px;
+      font-size: 14px;
+    }
+
+    button {
+      margin-top: 10px;
+      padding: 5px 15px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Universidad Tecnológica Nacional</h1>
+  <h2>Facultad Regional Avellaneda</h2>
+  <h3>Sistema Académico SYSACAD</h3>
+  <h3>Módulo de autogestión alumnos</h3>
+
+  <div class="login-box">
+    <h3>Inicio de sesión</h3>
+    <form id="loginForm">
+      <div>
+        <label for="id">Legajo:</label>
+        <input type="text" id="id" name="id">
+      </div>
+      <div>
+        <label for="password">Contraseña:</label>
+        <input type="password" id="password" name="password">
+      </div>
+      <button type="submit">Ingresar</button>
+    </form>
+  </div>
+    <script type="module" src="login.js"></script>
+</body>
+</html>

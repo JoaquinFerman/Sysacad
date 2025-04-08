@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Panel de alumno - SYSACAD</title>
+  <style>
+    body {
+      background-image: url('https://www.transparenttextures.com/patterns/white-wall-3.png');
+      font-family: 'Times New Roman', serif;
+      text-align: center;
+      padding-top: 40px;
+    }
+
+    h1, h2 {
+      color: blue;
+      margin: 0;
+    }
+
+    h3 {
+      color: #4444cc;
+      margin: 2px 0 5px;
+      font-weight: normal;
+    }
+
+    .welcome {
+      margin: 30px 0 20px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .menu-box {
+      background-color: white;
+      border: 2px solid blue;
+      display: inline-block;
+      padding: 20px 40px;
+      margin-top: 10px;
+      text-align: left;
+    }
+
+    .menu-box h3 {
+      background-color: blue;
+      color: white;
+      padding: 10px;
+      margin: -20px -40px 20px;
+      text-align: center;
+    }
+
+    ul {
+      padding-left: 20px;
+    }
+
+    li {
+      margin-bottom: 10px;
+      font-size: 17px;
+    }
+
+    a {
+      text-decoration: none;
+      color: #0000cc;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Universidad Tecnológica Nacional</h1>
+  <h2>Facultad Regional Avellaneda</h2>
+  <h3>Sistema Académico SYSACAD</h3>
+  <h3>Módulo de autogestión alumnos</h3>
+
+  <div class="welcome" id="welcomeMsg">Cargando...</div>
+
+  <div class="menu-box">
+    <h3>Menú de alumno</h3>
+    <ul>
+      <li><a href="/inscripcion-materias">Inscribirse a materias</a></li>
+      <li><a href="/notas-cursada">Notas de la cursada</a></li>
+      <li><a href="/inscripcion-final">Inscribirse a final</a></li>
+    </ul>
+  </div>
+
+  <script type="module" src="main.js"></script>
+
+</body>
+</html>
