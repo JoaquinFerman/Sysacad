@@ -1,6 +1,0 @@
-*.pem
-.vscode/
-.env
-bin/
-obj/
-.gitignore
