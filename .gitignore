@@ -1,3 +1,5 @@
 *.pem
 .vscode/
 .env
+bin/
+obj/
