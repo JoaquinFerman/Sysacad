@@ -1,6 +1,6 @@
 *.pem
 .vscode/
 .env
-/bin
-/obj
+bin/
+obj/
 .gitignore
