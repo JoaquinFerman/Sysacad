@@ -11,9 +11,9 @@ namespace PrimeraWebAPI.Controllers
     public class NameController : ControllerBase {
         [HttpGet]
         [Authorize]
-        public IActionResult GetName() {
-            var id = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            Student student = StudentsService.GetStudents().Find(s => s.Id == int.Parse(id));
+        public async Task<IActionResult> GetName() {
+            var sId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            Student student = (await StudentsService.GetStudents()).Find(s => s.SId == int.Parse(sId));
             return Ok( new { name = student.Name, surname = student.Surname } );
         }
     }

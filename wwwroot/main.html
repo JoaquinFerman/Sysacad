@@ -17,15 +17,9 @@
     }
 
     h3 {
-      color: #4444cc;
+      color: blue;
       margin: 2px 0 5px;
       font-weight: normal;
-    }
-
-    .welcome {
-      margin: 30px 0 20px;
-      font-size: 18px;
-      font-weight: bold;
     }
 
     .menu-box {
@@ -50,35 +44,44 @@
     }
 
     li {
-      margin-bottom: 10px;
+      margin-bottom: 5px;
       font-size: 17px;
     }
 
     a {
-      text-decoration: none;
-      color: #0000cc;
+      text-decoration: underline;
+      text-underline-offset: 2px;
     }
 
     a:hover {
       text-decoration: underline;
     }
+
   </style>
 </head>
 <body>
-
+<div class="titles">
   <h1>Universidad Tecnológica Nacional</h1>
   <h2>Facultad Regional Avellaneda</h2>
   <h3>Sistema Académico SYSACAD</h3>
   <h3>Módulo de autogestión alumnos</h3>
-
-  <div class="welcome" id="welcomeMsg">Cargando...</div>
+</div>
 
   <div class="menu-box">
-    <h3>Menú de alumno</h3>
+    <h3 id="nameBox"></h3>
     <ul>
-      <li><a href="/inscripcion-materias">Inscribirse a materias</a></li>
-      <li><a href="/notas-cursada">Notas de la cursada</a></li>
-      <li><a href="/inscripcion-final">Inscribirse a final</a></li>
+      <li><a href="subjects.html">Materias del plan</a></li>
+      <li><a href="estado.html">Estado academico</a></li>
+      <li><a href="examenes.html">Examenes</a></li>
+      <li><a href="parciales.html">Cursado / Notas de parciales / Encuestas</a></li>
+      <li><a href="correlativas-cursar.html">Correlatividad para cursar</a></li>
+      <li><a href="correlativas-rendir.html">Correlatividad para rendir</a></li>
+      <li><a href="inscripcion-examen.html">Inscripcion a examen</a></li>
+      <li><a href="inscripcion-cursado.html">Inscripcion a cursado</a></li>
+      <li><a href="cambio-contra.html">Cambio de Contraseña</a></li>
+      <li><a href="avisos.html">Avisos</a></li>
+      <li><a href="boleto.html">Boleto Especial Educativo</a></li>
+      <li><a href="login.html">Salir</a></li>
     </ul>
   </div>
 

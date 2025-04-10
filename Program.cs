@@ -33,8 +33,18 @@ builder.Services.AddAuthorization(options =>
     options.AddPolicy("AdminOnly", policy => policy.RequireClaim("IsAdmin", "True"));
 });
 
+builder.Services.AddDbContext<UniversidadContext>();
+
 var app = builder.Build();
 
+using (var scope = app.Services.CreateScope())
+{
+    var context = scope.ServiceProvider.GetRequiredService<UniversidadContext>();
+    var sImporter = new CsvSubjectsImporter(context);
+    await sImporter.ImportFromCsv("Data/subjects.csv");
+    var dImporter = new CsvDivisionsImporter(context);
+    await dImporter.ImportFromCsv("Data/divisions.csv");
+}
 app.UseStaticFiles();
 app.UseAuthentication();
 app.UseAuthorization();

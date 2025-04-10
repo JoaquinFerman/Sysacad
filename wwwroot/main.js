@@ -21,14 +21,12 @@ const init = async () => {
         });
         if (response.ok) {
             const result = await response.json();
-            document.getElementById("welcomeMsg").textContent = "Bienvenido/a " + result.surname + ", " + result.name;
+            document.getElementById("nameBox").textContent = result.surname + ", " + result.name;
         } else {
-            alert("Error elsee")
-            document.getElementById("welcomeMsg").textContent = "Error";
+            document.getElementById("nameBox").textContent = "Error";
         }
     } catch (error) {
-        alert("Error catch");
-        document.getElementById("welcomeMsg").textContent = "Error";
+        document.getElementById("nameBox").textContent = "Error";
     }
 }
 

@@ -1,37 +1,38 @@
-using MongoDB.Driver;
+using System.Threading.Tasks;
 using Sysachad.Models;
 
 public class StudentsService {
-    private static readonly MongoClient client = MongoConnection.GetClient() != null ? MongoConnection.GetClient() : new MongoClient();
-    private static readonly IMongoDatabase database = client.GetDatabase("Sysacad");
-    private static readonly IMongoCollection<Student> usersDb = database.GetCollection<Student>("Students");
-
-    public StudentsService() {
+    private readonly UniversidadContext _context;
+    public StudentsService(UniversidadContext context) {
+        _context = context;
+    }
+    public static async Task<List<Student>> GetStudents() {
+        await using var context = new UniversidadContext();
+        return context.Students.ToList();
     }
 
-    public static IMongoCollection<Student> GetStudentsDb() {
-        return usersDb;
-    }
-    public static List<Student> GetStudents() {
-        return usersDb.Find(_ => true).ToList();
+    public static Student? SearchStudent(int sId) {
+    using var context = new UniversidadContext();
+    return context.Students.FirstOrDefault(s => s.SId == sId);
     }
 
-    public static Student SearchStudent(int id) {
-        var users = usersDb.Find(u => u.Id == id).ToList();
-        return users.FirstOrDefault();
-    }
-    public static async Task UpdateStudent(Student user) {
-        var filtro = Builders<Student>.Filter.Eq(u => u.Id, user.Id);
-        await usersDb.ReplaceOneAsync(filtro, user);
+    public static async Task UpdateStudent(Student student) {
+        using var context = new UniversidadContext();
+        context.Students.Update(student);
+        await context.SaveChangesAsync();
     }
 
-    public static void AddStudent(Student user) {
-        usersDb.InsertOneAsync(user);
+    public static async Task AddStudent(Student student) {
+        using var context = new UniversidadContext();
+        await context.AddAsync(student);
+        await context.SaveChangesAsync();
     }
 
-    public static bool DeleteStudent(int id) {
-        var filtro = Builders<Student>.Filter.Eq(u => u.Id, id);
-        var resultado = usersDb.DeleteOne(filtro);
-        return resultado.DeletedCount > 0;
+    public static async Task<bool> DeleteStudent(int sId) {
+        using var context = new UniversidadContext();
+        var student = context.Students.ToList().Find(s => s.SId == sId);
+        var result = context.Remove<Student>(student);
+        await context.SaveChangesAsync();
+        return result != null;
     }
 }

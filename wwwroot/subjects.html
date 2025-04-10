@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Tecnicatura UTN - Materias</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      padding: 20px;
+    }
+
+    h1, h2 {
+      text-align: center;
+      color: #003399;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: white;
+      margin-top: 20px;
+    }
+
+    th, td {
+      border: 1px solid #000099;
+      padding: 8px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #000099;
+      color: white;
+    }
+
+    #volver {
+      display: block;
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    #volver a {
+      color: #660099;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Universidad Tecnológica Nacional<br>Facultad Regional Avellaneda</h1>
+  <h2>Sistema Académico SYSACAD<br>Módulo de autogestión alumnos</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Año</th>
+        <th>Dic.</th>
+        <th>Materia</th>
+      </tr>
+    </thead>
+    <tbody id="materias-body">
+      <!-- Se llenará dinámicamente -->
+    </tbody>
+  </table>
+
+  <div id="volver">
+    <a href="#">Volver a menú principal</a>
+  </div>
+
+  <script src="subjects.js"></script>
+
+</body>
+</html>

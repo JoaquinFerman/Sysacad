@@ -10,25 +10,35 @@ namespace Sysachad.Controllers
 
         [HttpGet]
         [Authorize(Policy = "AdminOnly")]
-        public IActionResult GetStudents() {
-            var users = StudentsService.GetStudents();
-            return Ok(users);
+        public async Task<IActionResult> GetData([FromQuery] string data) {
+            switch (data) {
+                case "students":
+                    var students = await StudentsService.GetStudents();
+                    return Ok( new { data = students });
+                case "subjects":
+                    var subjects = await SubjectsService.GetSubjects();
+                    return Ok( new { data = subjects });
+                case "divisions":
+                    var divisions = await DivisionsService.GetDivisions();
+                    return Ok( new { data = divisions });
+                default:
+                    return BadRequest("Invalid data type"); 
+            }
         }
 
         [HttpGet("{id}")]
         [Authorize(Policy = "AdminOnly")]
-        public IActionResult GetUserByID([FromRoute] int id) {
-            var users = StudentsService.GetStudents();
+        public async Task<IActionResult> GetUserByID([FromRoute] int Id) {
+            var users = await StudentsService.GetStudents();
 
-            if (users.Any(s => s.Id == id) == false) {
+            if (users.Any(s => s.Id == Id) == false) {
                 return NotFound("Usuario no encontrado");
             }
 
-            return Ok(users.FirstOrDefault(s => s.Id == id));
+            return Ok(users.FirstOrDefault(s => s.Id == Id));
         }
 
         public class AddStudentModel(){
-            public int Id { get; set; }
             public string Password { get; set; }
             public string Name { get; set; }
             public string Surname { get; set; }
@@ -36,24 +46,21 @@ namespace Sysachad.Controllers
         }
 
         [HttpPost]
-        [Authorize(Policy = "AdminOnly")]
-        public IActionResult AddUser([FromBody] AddStudentModel student) {
+        //[Authorize(Policy = "AdminOnly")]
+        public async Task<IActionResult> AddUser([FromBody] AddStudentModel student) {
             if (!ModelState.IsValid) {
                 return BadRequest(ModelState);
             }
-            if (new List<Object> {student.Id, student.Password }.Any(f => f == default)){
+            if (new List<Object> { student.Password }.Any(f => f == default)){
                 return BadRequest("Faltan campos obligatorios");
             } 
-            var users = StudentsService.GetStudents();
+            var users = await StudentsService.GetStudents();
 
-            if (users.Any(s => s.Id == student.Id)) {
-                return BadRequest("Id en uso");
-            }
-            Student newStudent = new Student(student.Name, student.Surname, student.Id, student.Password, student.isAdmin);
+            Student newStudent = new Student(student.Name, student.Surname, student.Password, student.isAdmin);
             newStudent.Password = BCrypt.Net.BCrypt.EnhancedHashPassword(student.Password, workFactor: 12);
-            StudentsService.AddStudent(newStudent);
+            await StudentsService.AddStudent(newStudent);
 
-            return CreatedAtAction(nameof(GetUserByID), new { newStudent.Id }, newStudent);
+            return Ok("Student added successfully, SID: " + newStudent.Id);
         }
 
         [HttpPut]
@@ -77,13 +84,13 @@ namespace Sysachad.Controllers
 
         [HttpDelete("{id}")]
         [Authorize(Policy = "AdminOnly")]
-        public IActionResult DeleteUser(int id) {
-            var users = StudentsService.GetStudents();
-            if (users.Any(s => s.Id == id) == false) {
+        public async Task<IActionResult> DeleteUser(int Id) {
+            var users = await StudentsService.GetStudents();
+            if (users.Any(s => s.Id == Id) == false) {
                 return NotFound("Usuario no encontrado");
             }
 
-            StudentsService.DeleteStudent(id);
+            await StudentsService.DeleteStudent(Id);
 
             return Ok();
         }

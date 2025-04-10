@@ -1,0 +1,19 @@
+SId,Name,Duration,Attendance,Year,Plan
+101,Programacion I,Cuatrimestral,Virtual,1,P2024
+102,Arquitectura y Sistemas Operativos,Cuatrimestral,Virtual,1,P2024
+103,Matematica,Cuatrimestral,InPerson,1,P2024
+104,Organizacion Empresarial,Cuatrimestral,InPerson,1,P2024
+105,Programacion II,Cuatrimestral,Virtual,2,P2024
+106,Probabilidad y Estadistica,Cuatrimestral,InPerson,2,P2024
+107,Base de Datos I,Cuatrimestral,Virtual,2,P2024
+108,Ingles I,Cuatrimestral,InPerson,2,P2024
+201,Programacion III,Cuatrimestral,Virtual,3,P2024
+202,Base de Datos II,Cuatrimestral,Virtual,3,P2024
+203,Metodologia de Sistemas I,Cuatrimestral,Virtual,3,P2024
+204,Ingles II,Cuatrimestral,InPerson,3,P2024
+205,Programacion IV,Cuatrimestral,Virtual,4,P2024
+206,Metodologia de Sistemas II,Cuatrimestral,Virtual,4,P2024
+207,Introduccion al Analisis de Datos,Cuatrimestral,InPerson,4,P2024
+208,Legislacion,Cuatrimestral,InPerson,4,P2024
+209,Gestion de Desarrollo de software,Cuatrimestral,Virtual,4,P2024
+210,Trabajo Final Integrador,Cuatrimestral,InPerson,4,P2024

@@ -1,25 +1,28 @@
-using MongoDB.Bson.Serialization.Attributes;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 namespace Sysachad.Models
 {
-    [BsonIgnoreExtraElements]
     public class Student
     {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
+        [Required]
         public string Name { get; set; }
+        [Required]
         public string Surname { get; set; }
+        [Required]
         public string Password { get; set; }
         public bool IsAdmin { get; set; } = false;
 
-        public Student(string name, string surname, int legajo, string password, bool isAdmin) : this() {
+        public Student(string name, string surname, string password, bool isAdmin) : this() {
             Name = name;
             Surname = surname;
-            Id = legajo;
             Password = password;
             IsAdmin = isAdmin;
         }
 
         public Student(){
-            Id = 0;
             Name = "NoName";
             Surname = "NoSurname";
             Password = "NoPassword";
