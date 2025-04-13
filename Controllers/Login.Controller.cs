@@ -1,7 +1,5 @@
-using System.Dynamic;
 using Microsoft.AspNetCore.Mvc;
 using Sysachad.Services;
-using Sysachad.Models;
 
 namespace Sysachad.Controllers
 {

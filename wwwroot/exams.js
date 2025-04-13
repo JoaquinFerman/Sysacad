@@ -1,6 +1,6 @@
 import { verifyToken } from "./verifyToken.js";
 
-async function cargarMaterias() {
+async function cargarNotas() {
     const token = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*=\s*([^;]*).*$)|^.*$/, "$1");
     
     if (!token) {
@@ -51,4 +51,4 @@ async function cargarMaterias() {
     }
 }
 
-cargarMaterias();
+cargarNotas();

@@ -38,6 +38,7 @@ builder.Services.AddDbContext<UniversidadContext>();
 builder.Services.AddScoped<StudentsService>();
 builder.Services.AddScoped<SubjectsService>();
 builder.Services.AddScoped<StudentsSubjectsService>();
+builder.Services.AddScoped<ClassesService>();
 
 var app = builder.Build();
 

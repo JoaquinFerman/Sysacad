@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using Sysachad.Models;
 
 public class ClassesService {
@@ -5,8 +6,7 @@ public class ClassesService {
     public ClassesService(UniversidadContext context) {
         _context = context;
     }
-    public static async Task<List<Class>> GetClasses() {
-        await using var context = new UniversidadContext();
-        return context.Classes.ToList();
+    public async Task<List<Class>> GetClasses() {
+        return await _context.Classes.ToListAsync();
     }
 }

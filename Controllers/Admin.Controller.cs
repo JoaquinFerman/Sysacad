@@ -10,11 +10,13 @@ namespace Sysachad.Controllers
     public class AdminController : ControllerBase {
         private readonly StudentsService _studentsService;
         private readonly SubjectsService _subjectsService;
+        private readonly ClassesService _classesService;
 
-        public AdminController(StudentsService studentsService, SubjectsService subjectsService)
+        public AdminController(StudentsService studentsService, SubjectsService subjectsService, ClassesService classesService)
         {
             _studentsService = studentsService;
             _subjectsService = subjectsService;
+            _classesService = classesService;
         }
 
         [HttpGet]
@@ -27,10 +29,10 @@ namespace Sysachad.Controllers
                     var students = await _studentsService.GetStudents();
                     return Ok(new { data = students });
                 case "subjects":
-                    var subjects = await _subjectsService.GetSubjects(); // no tocar, se mantiene
+                    var subjects = await _subjectsService.GetSubjects();
                     return Ok(new { data = subjects });
                 case "classes":
-                    var classes = await ClassesService.GetClasses(); // no tocar
+                    var classes = await _classesService.GetClasses();
                     return Ok(new { data = classes });
                 default:
                     return BadRequest("Invalid data type");

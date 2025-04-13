@@ -37,6 +37,10 @@ namespace Sysachad.Migrations
                     b.Property<int>("HoursBin")
                         .HasColumnType("int");
 
+                    b.Property<string>("Professor")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("Room")
                         .HasColumnType("int");
 

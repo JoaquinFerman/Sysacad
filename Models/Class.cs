@@ -9,8 +9,8 @@ namespace Sysachad.Models
         public int SId { get; set; } // Subject
         [Required]
         public int CId { get; set; } //  Class itself
-        public int Room { get; set; } = 0; // 0 = virtual
-        public string Professor = "noName";
+        public int Room { get; set; } // 0 = virtual
+        public string Professor { get; set; }
         public int DaysBin { get; set; }
         [NotMapped]
         public List<string?> Days => DaysBin
@@ -20,11 +20,11 @@ namespace Sysachad.Models
             {
                 return d switch
                 {
-                    '1' => "Monday",
-                    '2' => "Tuesday",
-                    '3' => "Wednesday",
-                    '4' => "Thursday",
-                    '5' => "Friday",
+                    '1' => "Lunes",
+                    '2' => "Martes",
+                    '3' => "Miercoles",
+                    '4' => "Jueves",
+                    '5' => "Viernes",
                     _ => null
                 };
             })
@@ -32,7 +32,7 @@ namespace Sysachad.Models
             .ToList();
         public int HoursBin { get; set; }
         [NotMapped]
-        public int Hours => (int)Math.Pow(2, -HoursBin);
+        public int Hours => (int)Math.Pow(2, HoursBin);
 
         public Class(int sId, int cId, int room, string professor, int days, int hours) : this() {
             SId = sId;

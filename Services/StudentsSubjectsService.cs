@@ -8,7 +8,7 @@ public class StudentsSubjectsService {
     public async Task<List<StudentsSubjects>> GetStudentsSubjects(int id, string? state = null) {
         List<StudentsSubjects> classes;
         switch (state) {
-            case "on course":
+            case "oncourse":
                 classes = await _context.StudentsSubjects
                     .Where(c => c.StudentId == id && c.StateBin == 0)
                     .ToListAsync();
