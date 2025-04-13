@@ -1,38 +1,39 @@
-using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using Sysachad.Models;
 
-public class StudentsService {
-    private readonly UniversidadContext _context;
-    public StudentsService(UniversidadContext context) {
-        _context = context;
-    }
-    public static async Task<List<Student>> GetStudents() {
-        await using var context = new UniversidadContext();
-        return context.Students.ToList();
-    }
+namespace Sysachad.Services {
+    public class StudentsService {
+        private readonly UniversidadContext _context;
 
-    public static Student? SearchStudent(int sId) {
-    using var context = new UniversidadContext();
-    return context.Students.FirstOrDefault(s => s.SId == sId);
-    }
+        public StudentsService(UniversidadContext context) {
+            _context = context;
+        }
 
-    public static async Task UpdateStudent(Student student) {
-        using var context = new UniversidadContext();
-        context.Students.Update(student);
-        await context.SaveChangesAsync();
-    }
+        public async Task<List<Student>> GetStudents() {
+            return await _context.Students.ToListAsync();
+        }
 
-    public static async Task AddStudent(Student student) {
-        using var context = new UniversidadContext();
-        await context.AddAsync(student);
-        await context.SaveChangesAsync();
-    }
+        public async Task<Student?> SearchStudent(int id) {
+            return await _context.Students.FirstOrDefaultAsync(s => s.Id == id);
+        }
 
-    public static async Task<bool> DeleteStudent(int sId) {
-        using var context = new UniversidadContext();
-        var student = context.Students.ToList().Find(s => s.SId == sId);
-        var result = context.Remove<Student>(student);
-        await context.SaveChangesAsync();
-        return result != null;
+        public async Task UpdateStudent(Student student) {
+            _context.Students.Update(student);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task AddStudent(Student student) {
+            await _context.Students.AddAsync(student);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task<bool> DeleteStudent(int id) {
+            var student = await _context.Students.FindAsync(id);
+            if (student == null) return false;
+
+            _context.Students.Remove(student);
+            await _context.SaveChangesAsync();
+            return true;
+        }
     }
 }

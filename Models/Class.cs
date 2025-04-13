@@ -2,13 +2,13 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 namespace Sysachad.Models
 {
-    public class Division {
+    public class Class {
         [Key]
-        public int Id { get; set; } = 0;
+        public int Id { get; set; }
         [Required]
-        public int SId { get; set; }
+        public int SId { get; set; } // Subject
         [Required]
-        public int CId { get; set; }
+        public int CId { get; set; } //  Class itself
         public int Room { get; set; } = 0; // 0 = virtual
         public string Professor = "noName";
         public int DaysBin { get; set; }
@@ -34,7 +34,7 @@ namespace Sysachad.Models
         [NotMapped]
         public int Hours => (int)Math.Pow(2, -HoursBin);
 
-        public Division(int sId, int cId, int room, string professor, int days, int hours) : this() {
+        public Class(int sId, int cId, int room, string professor, int days, int hours) : this() {
             SId = sId;
             CId = cId;
             Room = room;
@@ -42,6 +42,6 @@ namespace Sysachad.Models
             DaysBin = days;
             HoursBin = hours;
         }
-        public Division() {}
+        public Class() {}
     }
 }

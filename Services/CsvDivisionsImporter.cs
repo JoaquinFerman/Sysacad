@@ -11,7 +11,7 @@ public class CsvDivisionsImporter
 
     public async Task ImportFromCsv(string filePath)
     {
-        if (_context.Divisions.Any()) {
+        if (_context.Classes.Any()) {
             Console.WriteLine("La tabla Divisions ya tiene datos. No se importará nada.");
             return;
         }
@@ -21,7 +21,7 @@ public class CsvDivisionsImporter
         {
             var values = line.Split(',');
 
-            var division = new Division(
+            var division = new Class(
                 sId: int.Parse(values[0]),
                 cId: int.Parse(values[1]),
                 room: int.Parse(values[2]),
@@ -31,7 +31,7 @@ public class CsvDivisionsImporter
             );
 
 
-            _context.Divisions.Add(division);
+            _context.Classes.Add(division);
         }
 
         await _context.SaveChangesAsync();

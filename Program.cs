@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Sysachad.Services;
 
@@ -34,6 +35,9 @@ builder.Services.AddAuthorization(options =>
 });
 
 builder.Services.AddDbContext<UniversidadContext>();
+builder.Services.AddScoped<StudentsService>();
+builder.Services.AddScoped<SubjectsService>();
+builder.Services.AddScoped<StudentsSubjectsService>();
 
 var app = builder.Build();
 
@@ -43,7 +47,9 @@ using (var scope = app.Services.CreateScope())
     var sImporter = new CsvSubjectsImporter(context);
     await sImporter.ImportFromCsv("Data/subjects.csv");
     var dImporter = new CsvDivisionsImporter(context);
-    await dImporter.ImportFromCsv("Data/divisions.csv");
+    await dImporter.ImportFromCsv("Data/classes.csv");
+    var ssImporter = new CsvStudentsSubjectsImporter(context);
+    await ssImporter.ImportFromCsv("Data/studentsSubjects.csv");
 }
 app.UseStaticFiles();
 app.UseAuthentication();

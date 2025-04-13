@@ -30,4 +30,12 @@ const init = async () => {
     }
 }
 
+document.getElementById("logout").addEventListener("click", (e) => {
+    e.preventDefault();
+    // Borrar la cookie del token
+    document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    // Redirigir al login
+    window.location.href = "login.html";
+});
+
 init();

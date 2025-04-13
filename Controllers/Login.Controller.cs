@@ -10,25 +10,28 @@ namespace Sysachad.Controllers
     public class LoginController : ControllerBase
     {
         private readonly TokenService _tokenService;
-        public LoginController(TokenService tokenService)
+        private readonly StudentsService _studentsService;
+
+        public LoginController(TokenService tokenService, StudentsService studentsService)
         {
             _tokenService = tokenService;
+            _studentsService = studentsService;
         }
 
-        public class LoginModel {
-            public int SId { get; set; }
+        public class LoginModel
+        {
+            public int Id { get; set; }
             public string Password { get; set; }
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login([FromBody] LoginModel login) {
-            Student? student = StudentsService.SearchStudent(login.SId);
-            if (student != null && BCrypt.Net.BCrypt.EnhancedVerify(login.Password, student.Password)) {
-                var token = _tokenService.GenerateToken(login.SId, student.IsAdmin);
-                dynamic message = new ExpandoObject();
-                message.Token = token;
-                await StudentsService.UpdateStudent(student);
-                return Ok( new {Token = token});
+        public async Task<IActionResult> Login([FromBody] LoginModel login)
+        {
+            var student = await _studentsService.SearchStudent(login.Id);
+            if (student != null && BCrypt.Net.BCrypt.EnhancedVerify(login.Password, student.Password))
+            {
+                var token = _tokenService.GenerateToken(login.Id, student.IsAdmin);
+                return Ok(new { Token = token });
             }
             return Unauthorized("Invalid ID or password");
         }

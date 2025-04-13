@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using Sysachad.Models;
 
 public class SubjectsService {
@@ -5,8 +6,7 @@ public class SubjectsService {
     public SubjectsService(UniversidadContext context) {
         _context = context;
     }
-    public static async Task<List<Subject>> GetSubjects() {
-        await using var context = new UniversidadContext();
-        return context.Subjects.ToList();
+    public async Task<List<Subject>> GetSubjects() {
+        return await _context.Subjects.ToListAsync();
     }
 }

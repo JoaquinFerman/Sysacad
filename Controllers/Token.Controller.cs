@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace PrimeraWebAPI.Controllers
+namespace Sysachad.Controllers
 {
     [ApiController]
     [Route("api/v0/[controller]")]

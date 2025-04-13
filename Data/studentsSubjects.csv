@@ -1,0 +1,4 @@
+SId,SId,CId,Grade,State
+1,101,111,9,passed
+1,102,111,NULL,oncourse
+1,103,111,NULL,final
