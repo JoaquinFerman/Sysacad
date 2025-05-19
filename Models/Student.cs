@@ -2,6 +2,9 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 namespace Sysachad.Models
 {
+    /// <summary>
+    /// Represents a student in the university
+    /// </summary>
     public class Student
     {
         [Key]

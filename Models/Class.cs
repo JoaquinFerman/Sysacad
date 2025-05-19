@@ -1,7 +1,9 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-namespace Sysachad.Models
-{
+namespace Sysachad.Models {
+    /// <summary>
+    /// Represents a class in the university. It is not specific to a subject by the class ID itself, for that you need the subject ID
+    /// </summary>
     public class Class {
         [Key]
         public int Id { get; set; }
@@ -30,9 +32,9 @@ namespace Sysachad.Models
             })
             .Where(day => day != null)
             .ToList();
-        public int HoursBin { get; set; }
+        public bool HoursBin { get; set; }
         [NotMapped]
-        public int Hours => (int)Math.Pow(2, HoursBin);
+        public int Hours => (int)Math.Pow(2, HoursBin ? 2 : 1);
 
         public Class(int sId, int cId, int room, string professor, int days, int hours) : this() {
             SId = sId;
@@ -40,7 +42,7 @@ namespace Sysachad.Models
             Room = room;
             Professor = professor;
             DaysBin = days;
-            HoursBin = hours;
+            HoursBin = hours == 2;
         }
         public Class() {}
     }

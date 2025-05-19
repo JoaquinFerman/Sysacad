@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Sysachad.Models;
 using Sysachad.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -37,8 +37,11 @@ builder.Services.AddAuthorization(options =>
 builder.Services.AddDbContext<UniversidadContext>();
 builder.Services.AddScoped<StudentsService>();
 builder.Services.AddScoped<SubjectsService>();
-builder.Services.AddScoped<StudentsSubjectsService>();
+builder.Services.AddScoped<StudentSubjectsService>();
 builder.Services.AddScoped<ClassesService>();
+builder.Services.AddScoped<CorrelativesService>();
+builder.Services.AddScoped<StudentExamService>();
+builder.Services.AddScoped<ExamsService>();
 
 var app = builder.Build();
 
@@ -47,10 +50,14 @@ using (var scope = app.Services.CreateScope())
     var context = scope.ServiceProvider.GetRequiredService<UniversidadContext>();
     var sImporter = new CsvSubjectsImporter(context);
     await sImporter.ImportFromCsv("Data/subjects.csv");
-    var dImporter = new CsvDivisionsImporter(context);
+    var dImporter = new CsvClassesImporter(context);
     await dImporter.ImportFromCsv("Data/classes.csv");
     var ssImporter = new CsvStudentsSubjectsImporter(context);
     await ssImporter.ImportFromCsv("Data/studentsSubjects.csv");
+    var cImporter = new CsvCorrelativesImporter(context);
+    await cImporter.ImportFromCsv("Data/correlatives.csv");
+    var eImporter = new CsvExamsImporter(context);
+    await eImporter.ImportFromCsv("Data/exams.csv");
 }
 app.UseStaticFiles();
 app.UseAuthentication();

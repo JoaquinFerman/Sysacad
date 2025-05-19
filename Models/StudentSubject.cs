@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 namespace Sysachad.Models
 {
-    public class StudentsSubjects
+    public class StudentSubject
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -18,7 +18,7 @@ namespace Sysachad.Models
         [NotMapped]
         public string State => StateBin.ToString();
 
-        public StudentsSubjects(int studentId, int subjectId, int classId, int? grade, StudentsSubjectsStates state){
+        public StudentSubject(int studentId, int subjectId, int classId, int? grade, StudentsSubjectsStates state){
             StudentId = studentId;
             SubjectId = subjectId;
             ClassId = classId;
@@ -26,6 +26,6 @@ namespace Sysachad.Models
             StateBin = state;
         }
 
-        public StudentsSubjects() { }
+        public StudentSubject() { }
     }
 }

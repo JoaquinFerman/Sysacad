@@ -1,24 +1,20 @@
 using Sysachad.Models;
 
-public class CsvStudentsSubjectsImporter
-{
+public class CsvStudentsSubjectsImporter {
     private readonly UniversidadContext _context;
 
-    public CsvStudentsSubjectsImporter(UniversidadContext context)
-    {
+    public CsvStudentsSubjectsImporter(UniversidadContext context) {
         _context = context;
     }
 
-    public async Task ImportFromCsv(string filePath)
-    {
-        if (_context.StudentsSubjects.Any()) {
+    public async Task ImportFromCsv(string filePath) {
+        if (_context.StudentSubjects.Any()) {
             Console.WriteLine("La tabla StudentsSubjects ya tiene datos. No se importará nada.");
             return;
         }
         
         var lines = await File.ReadAllLinesAsync(filePath);
-        foreach (var line in lines.Skip(1))
-        {
+        foreach (var line in lines.Skip(1)) {
             var values = line.Split(',');
 
             StudentsSubjectsStates stateEnum = values[4].ToLower() switch {
@@ -28,7 +24,7 @@ public class CsvStudentsSubjectsImporter
                 _ => throw new Exception($"Valor inválido para plan: {values[4]}")
             };
 
-            var division = new StudentsSubjects(
+            var division = new StudentSubject(
                 studentId: int.Parse(values[0]),
                 subjectId: int.Parse(values[1]),
                 classId: int.Parse(values[2]),
@@ -39,7 +35,7 @@ public class CsvStudentsSubjectsImporter
             );
 
 
-            _context.StudentsSubjects.Add(division);
+            _context.StudentSubjects.Add(division);
         }
 
         await _context.SaveChangesAsync();

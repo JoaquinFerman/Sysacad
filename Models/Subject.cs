@@ -7,18 +7,18 @@ namespace Sysachad.Models
         public int Id { get; set; } = 0;
         [Required]
         public int SId { get; set; }
-        public string Name { get; set; } = "noName";
+        public string Name { get; set; }
 
-        public bool DurationBin { get; set; } = false; // 0 = Cuatrimestral, 1 = Anual
+        public bool DurationBin { get; set; } = false; // false = Cuatrimestral, true = Anual
         [NotMapped]
         public string Duration => DurationBin ? "Anual" : "Cuatrimestral";
 
-        public bool AttendanceBin { get; set; } = false; // 0 = Virtual, 1 = InPerson
+        public bool AttendanceBin { get; set; } = false; // false = Virtual, true = InPerson
         [NotMapped]
         public string Attendance => AttendanceBin ? "InPerson" : "Virtual";
 
         public int Year { get; set; }
-        public SubjectsPlan PlanBin { get; set; } = 0; // 0 = Plan 2024, 1 = Plan 2003
+        public SubjectsPlan PlanBin { get; set; } //  0 = Plan 2003, 1 = Plan 2024
         [NotMapped]
         public string Plan => PlanBin.ToString();
 

@@ -9,6 +9,12 @@ namespace Sysachad.Services {
             _configuration = configuration;
         }
 
+        /// <summary>
+        /// Generates a JWT token for the given user ID and admin status
+        /// </summary>
+        /// <returns>
+        /// New JWT token
+        /// </returns>
         public SymmetricSecurityKey GetJwtKey() {
             var key = _configuration["Jwt:Key"];
             if (string.IsNullOrEmpty(key)) {

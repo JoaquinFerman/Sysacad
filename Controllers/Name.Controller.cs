@@ -2,7 +2,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using Sysachad.Models;
-using Sysachad.Services;
 
 namespace Sysachad.Controllers
 {
@@ -19,6 +18,7 @@ namespace Sysachad.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> GetName() {
             var Id = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             var students = await _studentsService.GetStudents();

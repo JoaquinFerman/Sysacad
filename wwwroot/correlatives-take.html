@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Correlativas para Rendir - SYSACAD</title>
+  <style>
+    body {
+      font-family: "Times New Roman", serif;
+      background-image: url('https://www.transparenttextures.com/patterns/white-wall-3.png');
+      padding: 30px;
+      justify-items: center;
+      box-sizing: content-box;
+      margin: 0;
+    }
+
+    h1, h2 {
+      color: blue;
+      margin: 0;
+    }
+
+    h3 {
+      margin: 10px 0 20px;
+      font-weight: normal;
+    }
+
+    table {
+      width: 50%;
+      margin: 0 auto;
+      border-collapse: collapse;
+      border: 3px solid blue;
+      background-color: white;
+    }
+
+    th, td {
+      border: 1px solid blue;
+      padding: 6px 10px;
+      text-align: center;
+    }
+
+    caption {
+      font-weight: bold;
+      background-color: #0000cc;
+      color: white;
+      padding: 8px;
+    }
+
+    #volver {
+      margin-top: 20px;
+    }
+
+    #volver a {
+      color: #660099;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <h1>Universidad Tecnológica Nacional</h1>
+  <h2>Facultad Regional Avellaneda</h2>
+  <h3>Sistema Académico SYSACAD<br>Módulo de autogestión alumnos</h3>
+
+  <table>
+    <caption id="titulo">Correlatividad para Rendir</caption>
+    <tbody id="state-table">
+        <tr>
+            <th>Año</th>
+            <th>Materia</th>
+            <th>Correlatividad</th>
+            <th>Plan</th>
+        </tr>
+      <!-- JS insertará las filas -->
+    </tbody>
+  </table>
+
+  <div id="volver">
+    <a href="main.html">Volver a menú principal</a>
+  </div>
+
+  <script type="module" src="correlatives-take.js"></script>
+</body>
+</html>

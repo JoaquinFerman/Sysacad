@@ -1,24 +1,20 @@
 using Sysachad.Models;
 
-public class CsvSubjectsImporter
-{
+public class CsvSubjectsImporter {
     private readonly UniversidadContext _context;
 
-    public CsvSubjectsImporter(UniversidadContext context)
-    {
+    public CsvSubjectsImporter(UniversidadContext context) {
         _context = context;
     }
 
-    public async Task ImportFromCsv(string filePath)
-    {
+    public async Task ImportFromCsv(string filePath) {
         if (_context.Subjects.Any()) {
             Console.WriteLine("La tabla Subjects ya tiene datos. No se importará nada.");
             return;
         }
         
         var lines = await File.ReadAllLinesAsync(filePath);
-        foreach (var line in lines.Skip(1))
-        {
+        foreach (var line in lines.Skip(1)) {
             var values = line.Split(',');
 
             SubjectsPlan planEnum = values[5] switch {

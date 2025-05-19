@@ -6,6 +6,12 @@ public class SubjectsService {
     public SubjectsService(UniversidadContext context) {
         _context = context;
     }
+    /// <summary>
+    /// Gets all subjects from the database.
+    /// </summary>
+    /// <returns>
+    /// A list of subjects
+    /// </returns>
     public async Task<List<Subject>> GetSubjects() {
         return await _context.Subjects.ToListAsync();
     }

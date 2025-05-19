@@ -1,4 +1,10 @@
 SId,CId,Room,Professor,Days,Hours
-101,111,0,German,13,3
-102,111,0,Misis,4,2
-103,111,304,Fonte,2,2
+101,111,0,German,13,true
+102,111,0,Misis,4,true
+103,111,304,Fonte,2,true
+104,111,305,Ferraresi,5,true
+107,121,0,Abraham,2,true
+201,141,0,Baus,35,true
+105,121,0,Baus,13,true
+105,122,0,Baus,24,true
+105,123,0,German,35,true

@@ -31,7 +31,6 @@ async function cargarCursada() {
                     professor: curso.professor,
                     days: curso.days
                 }));
-                alert("hasta aca ok");
                 cursos.forEach(curso => {
                         const fila = document.createElement('tr');
                         fila.innerHTML = `

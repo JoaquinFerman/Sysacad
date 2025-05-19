@@ -6,6 +6,9 @@ public class ClassesService {
     public ClassesService(UniversidadContext context) {
         _context = context;
     }
+    /// <summary>
+    /// Get all classes from the database as a list
+    /// </summary>
     public async Task<List<Class>> GetClasses() {
         return await _context.Classes.ToListAsync();
     }

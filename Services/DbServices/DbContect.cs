@@ -6,7 +6,10 @@ public class UniversidadContext : DbContext
     public DbSet<Student> Students { get; set; }
     public DbSet<Subject> Subjects { get; set; }
     public DbSet<Class> Classes { get; set; }
-    public DbSet<StudentsSubjects> StudentsSubjects { get; set; }
+    public DbSet<StudentSubject> StudentSubjects { get; set; }
+    public DbSet<Correlative> Correlatives { get; set; }
+    public DbSet<Exam> Exams { get; set; }
+    public DbSet<StudentExam> StudentExams { get; set; }
     
     public UniversidadContext() 
     : base(new DbContextOptionsBuilder<UniversidadContext>()

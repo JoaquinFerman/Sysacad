@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Sysachad.Models;
-using Sysachad.Services;
 
 namespace Sysachad.Controllers
 {

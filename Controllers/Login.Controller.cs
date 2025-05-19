@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Sysachad.Models;
 using Sysachad.Services;
 
 namespace Sysachad.Controllers
@@ -25,7 +26,7 @@ namespace Sysachad.Controllers
         [HttpPost]
         public async Task<IActionResult> Login([FromBody] LoginModel login)
         {
-            var student = await _studentsService.SearchStudent(login.Id);
+            Student student = await _studentsService.SearchStudent(login.Id);
             if (student != null && BCrypt.Net.BCrypt.EnhancedVerify(login.Password, student.Password))
             {
                 var token = _tokenService.GenerateToken(login.Id, student.IsAdmin);

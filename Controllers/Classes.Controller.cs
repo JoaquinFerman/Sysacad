@@ -9,15 +9,17 @@ namespace Sysachad.Controllers
     [Route("api/v0/[controller]")]
     [Authorize]
     public class ClassesController : ControllerBase {
-        private readonly StudentsSubjectsService _studentsSubjectsService;
+        private readonly StudentSubjectsService _studentsSubjectsService;
         private readonly SubjectsService _subjectsService;
         private readonly StudentsService _studentsService;
         private readonly ClassesService _classesService;
-        public ClassesController(StudentsSubjectsService studentsSubjectsService, SubjectsService subjectsService, StudentsService studentsService, ClassesService classesService) {
+        private readonly CorrelativesService _correlativesService;
+        public ClassesController(StudentSubjectsService studentsSubjectsService, SubjectsService subjectsService, StudentsService studentsService, ClassesService classesService, CorrelativesService correlativesService) {
             _studentsSubjectsService = studentsSubjectsService;
             _subjectsService = subjectsService;
             _studentsService = studentsService;
             _classesService = classesService;
+            _correlativesService = correlativesService;
         }
         [HttpGet]
         [Authorize]
@@ -44,11 +46,11 @@ namespace Sysachad.Controllers
         public async Task<IActionResult> GetAcademicState() {
             int id = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
             List<Subject> subjects = await _subjectsService.GetSubjects();
-            List<StudentsSubjects> studentSubjects = await _studentsSubjectsService.GetStudentsSubjects(id);
+            List<StudentSubject> studentSubjects = await _studentsSubjectsService.GetStudentsSubjects(id);
             List<SubjectsReturn> subjectsReturn = new List<SubjectsReturn>();
             foreach(Subject subject in subjects){
                 bool found = false;
-                foreach(StudentsSubjects studentSubject in studentSubjects){
+                foreach(StudentSubject studentSubject in studentSubjects){
                     if(subject.SId == studentSubject.SubjectId){
                         subjectsReturn.Add(new SubjectsReturn{
                             Year = subject.Year,
@@ -86,9 +88,9 @@ namespace Sysachad.Controllers
         [Authorize]
         public async Task<IActionResult> GetGrades() {
             int id = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
-            List<StudentsSubjects> studentSubjects = await _studentsSubjectsService.GetStudentsSubjects(id, "passed");
+            List<StudentSubject> studentSubjects = await _studentsSubjectsService.GetStudentsSubjects(id, "passed");
             List<GradesReturn> grades = new List<GradesReturn>();
-            foreach(StudentsSubjects studentSubject in studentSubjects){
+            foreach(StudentSubject studentSubject in studentSubjects){
                 var subject = (await _subjectsService.GetSubjects()).FirstOrDefault(s => s.SId == studentSubject.SubjectId);
                 if (subject != null) {
                     grades.Add(new GradesReturn{
@@ -120,7 +122,7 @@ namespace Sysachad.Controllers
             if (student == null) {
                 return NotFound("Student not found");
             } else {
-                foreach(StudentsSubjects sSubject in await _studentsSubjectsService.GetStudentsSubjects(id, "oncourse")){
+                foreach(StudentSubject sSubject in await _studentsSubjectsService.GetStudentsSubjects(id, "oncourse")){
                     Subject? subject = (await _subjectsService.GetSubjects()).FirstOrDefault(s => s.SId == sSubject.SubjectId);
                     Class? classs = (await _classesService.GetClasses()).FirstOrDefault(c => c.CId == sSubject.ClassId && c.SId == sSubject.SubjectId);
                     string time =
@@ -146,6 +148,16 @@ namespace Sysachad.Controllers
                 }
                 return Ok( new {courses =  courses} );
             }
+        }
+
+        
+
+        [HttpGet("correlatives")]
+        [Authorize]
+        public async Task<IActionResult> GetCorrelatives([FromQuery] string? forW = "Cursar") {
+            int id = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+            List<CorrelativeReturn> correlativesReturn = await _correlativesService.GetCorrelatives(forW, id);
+            return Ok(new { correlatives = correlativesReturn });
         }
     }
 }
